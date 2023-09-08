@@ -56,7 +56,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="basic-default-name">Select Category</label>
                                 <div class="col-sm-10">
-                                    <select id="defaultSelect" name="category_id" class="form-select">
+                                    <select id="defaultSelect" name="product_category_id" class="form-select">
                                         <option>Default select</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
@@ -67,7 +67,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="basic-default-name">Select Sub Category</label>
                                 <div class="col-sm-10">
-                                    <select id="defaultSelect" name="category_id" class="form-select">
+                                    <select id="defaultSelect" name="product_subcategory_id" class="form-select">
                                         <option>Default select</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
