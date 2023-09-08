@@ -14,7 +14,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('category.index');
+        $title = "All Category";
+
+        return view('category.index',compact('title'));
     }
 
     /**
@@ -24,7 +26,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('category.create');
+        $title = "Add Category";
+
+        return view('category.create',compact('title'));
     }
 
     /**

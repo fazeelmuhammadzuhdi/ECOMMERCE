@@ -23,10 +23,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified', 'role:user'])->name('dashboard');
-
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::controller(DashboardController::class)->prefix('admin')->group(function () {
         Route::get('dashboard', 'index')->name('dashboard');
@@ -35,6 +31,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::resource('product', ProductController::class);
     });
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified', 'role:user'])->name('dashboard');
+
+
 
 
 Route::middleware('auth')->group(function () {

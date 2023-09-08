@@ -14,7 +14,8 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-        return view('subcategory.index');
+         $title = "All Sub Category";
+        return view('subcategory.index',compact('title'));
     }
 
     /**
@@ -24,7 +25,8 @@ class SubCategoryController extends Controller
      */
     public function create()
     {
-        return view('subcategory.create');
+        $title = "Add Sub Category";
+        return view('subcategory.create',compact('title'));
     }
 
     /**
