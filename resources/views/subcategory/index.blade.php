@@ -24,11 +24,9 @@
                             <td>1</td>
                             <td>1</td>
                             <td>
-                                <form action="#"
-                                    method="POST>
+                                <form action="#" method="POST">
                                     @csrf
-                                    <a href="#"
-                                    class="btn btn-primary">EDIT</a>
+                                    <a href="#" class="btn btn-primary">EDIT</a>
                                     <button type="submit" class="btn btn-danger">DELETE</button>
                                 </form>
                             </td>

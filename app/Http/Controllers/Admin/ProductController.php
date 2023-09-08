@@ -14,7 +14,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('product.index');
+        $title = "All Products";
+
+        return view('product.index', compact('title'));
     }
 
     /**
@@ -24,7 +26,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product.create');
+        $title = "Add Products";
+
+        return view('product.create', compact('title'));
     }
 
     /**

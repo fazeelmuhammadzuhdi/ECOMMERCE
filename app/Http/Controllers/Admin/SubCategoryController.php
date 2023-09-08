@@ -14,8 +14,8 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-         $title = "All Sub Category";
-        return view('subcategory.index',compact('title'));
+        $title = "All Sub Category";
+        return view('subcategory.index', compact('title'));
     }
 
     /**
@@ -26,7 +26,7 @@ class SubCategoryController extends Controller
     public function create()
     {
         $title = "Add Sub Category";
-        return view('subcategory.create',compact('title'));
+        return view('subcategory.create', compact('title'));
     }
 
     /**
