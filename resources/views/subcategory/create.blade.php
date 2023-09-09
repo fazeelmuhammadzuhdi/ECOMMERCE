@@ -35,12 +35,18 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="basic-default-name">Select Category</label>
                                 <div class="col-sm-10">
-                                    <select id="defaultSelect" name="category_id" class="form-select">
+                                    <select id="defaultSelect" name="category_id"
+                                        class="form-select @error('category_id') is-invalid @enderror">
                                         <option value="" selected disabled>Choose Category</option>
                                         @foreach ($category as $item)
                                             <option value="{{ $item->id }}">{{ $item->category_name }}</option>
                                         @endforeach
                                     </select>
+                                    @error('category_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
 

@@ -28,6 +28,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('dashboard', 'index')->name('dashboard');
         Route::resource('category', CategoryController::class);
         Route::resource('subcategory', SubCategoryController::class);
+        Route::get('edit-product-image/{id}', [ProductController::class, 'editImage'])->name('edit-image');
+        Route::put('update-product-image/{id}', [ProductController::class, 'updateImage'])->name('update-image');
         Route::resource('product', ProductController::class);
     });
 });

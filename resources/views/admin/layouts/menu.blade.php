@@ -86,7 +86,7 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Sub Category</span>
         </li>
-        <li class="menu-item {{ Route::is('subcategory.create') ? 'active' : '' }}">
+        <li class="menu-item {{ Route::is('subcategory.create') | Route::is('subcategory.edit') ? 'active' : '' }}">
             <a href="{{ route('subcategory.create') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Add Sub Category</div>
