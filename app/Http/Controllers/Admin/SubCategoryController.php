@@ -68,7 +68,7 @@ class SubCategoryController extends Controller
 
         // Alert Menggunakan Real Rashid
         alert()->success('Sub Category', "Sub Category $request->subcategory_name Created Successfully! ");
-        return redirect()->route('category.index');
+        return redirect()->route('subcategory.index');
     }
 
     /**
@@ -88,9 +88,10 @@ class SubCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Subcategory $subcategory)
     {
-        //
+        $title = "Edit Sub Category";
+        return view('subcategory.edit', compact('title', 'subcategory'));
     }
 
     /**
@@ -100,9 +101,19 @@ class SubCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Subcategory $subcategory)
     {
-        //
+        $request->validate([
+            'subcategory_name' => 'required|unique:subcategories',
+        ]);
+
+        $subcategory->update([
+            'subcategory_name' => $request->subcategory_name,
+            'slug' => Str::slug($request->subcategory_name)
+        ]);
+
+        alert()->success('Sub Category', "Sub Category $request->subcategory_name Updated Successfully! ");
+        return redirect()->route('subcategory.index');
     }
 
     /**
@@ -113,6 +124,10 @@ class SubCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $subCategory = Subcategory::findOrFail($id);
+        Category::where('id', $subCategory->category_id)->decrement('subcategory_count', 1);
+        $subCategory->delete();
+        alert()->success('Sub Category', "Sub Category $subCategory->category_name Deleted Successfully! ");
+        return back();
     }
 }

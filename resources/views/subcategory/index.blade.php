@@ -14,6 +14,7 @@
                             <th>Sub Category Name</th>
                             <th>Category Name</th>
                             <th>Sub Category Slug</th>
+                            <th>Product </th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -24,6 +25,7 @@
                                 <td>{{ $item->subcategory_name }}</td>
                                 <td>{{ $item->category_name }}</td>
                                 <td>{{ $item->slug }}</td>
+                                <td>{{ $item->product_count }}</td>
                                 <td>
                                     <form action="{{ route('subcategory.destroy', $item->id) }}" method="POST">
                                         @csrf
