@@ -12,6 +12,7 @@
                         <tr>
                             <th>No</th>
                             <th>Category Name</th>
+                            <th>Sub Category</th>
                             <th>Category Slug</th>
                             <th>Actions</th>
                         </tr>
@@ -21,6 +22,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->category_name }}</td>
+                                <td>{{ $item->subcategory_count }}</td>
                                 <td>{{ $item->slug }}</td>
                                 <td>
                                     <form action="{{ route('category.destroy', $item->id) }}" method="POST">
@@ -39,7 +41,7 @@
                             </tr>
                         @empty
                             <tr class="text-center fw-bold fs-5">
-                                <td colspan="4">No Data</td>
+                                <td colspan="5">No Data</td>
                             </tr>
                         @endforelse
 

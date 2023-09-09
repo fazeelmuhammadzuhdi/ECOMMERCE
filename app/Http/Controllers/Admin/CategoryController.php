@@ -18,7 +18,6 @@ class CategoryController extends Controller
     {
         $category = Category::latest()->get();
         $title = "All Category";
-
         return view('category.index', compact('title', 'category'));
     }
 
@@ -72,9 +71,11 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)
+    // public function edit($id)
     {
         $title = "Add Category";
-
+        // Tanpa Menggunakan Model Binding
+        // $category = Category::findOrFail($id);
         return view('category.edit', compact('title', 'category'));
     }
 
@@ -90,6 +91,9 @@ class CategoryController extends Controller
         $request->validate([
             'category_name' => 'required|unique:categories',
         ]);
+
+        // Tanpa Menggunakan Model Binding
+        // $category = Category::findOrFail($id);
 
         $category->update([
             'category_name' => $request->category_name,
