@@ -42,16 +42,20 @@ class SubCategoryController extends Controller
      */
     public function store(Request $request)
     {
+        // Validasi Sub Category
         $request->validate([
             'subcategory_name' => 'required|unique:subcategories',
             'category_id' => 'required'
         ]);
 
+        // Menngambil Category Id Dari Request Inputan
         $categoryId = $request->category_id;
         // dd($categoryId);
 
+        // Mengambil Nilai Category Name Yang Ada Di Tabel Category, Dimana Id Nya Harus Sama Dengan Request CategoryId
         $categoryName = Category::where('id', $categoryId)->value('category_name');
 
+        // Menyimpan Data Ke Dalam Tabel Subcategory
         Subcategory::create([
             'subcategory_name' => $request->subcategory_name,
             'category_id' => $categoryId,
@@ -59,7 +63,10 @@ class SubCategoryController extends Controller
             'slug' => Str::slug($request->subcategory_name)
         ]);
 
+        // Mengupdate Sub Category Count Yang Ada Pada Table Category, Ketika Id Nya Sama Dengan Request
         Category::where('id', $categoryId)->increment('subcategory_count', 1);
+
+        // Alert Menggunakan Real Rashid
         alert()->success('Sub Category', "Sub Category $request->subcategory_name Created Successfully! ");
         return redirect()->route('category.index');
     }
