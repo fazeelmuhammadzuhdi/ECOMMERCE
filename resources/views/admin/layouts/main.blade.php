@@ -54,6 +54,7 @@
 
             @include('admin.layouts.menu')
             <!-- / Menu -->
+            @include('sweetalert::alert')
 
             <!-- Layout container -->
             <div class="layout-page">
@@ -91,6 +92,7 @@
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
+
     <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/popper/popper.js') }}"></script>
     <script src="{{ asset('assets/vendor/js/bootstrap.js') }}"></script>

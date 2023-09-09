@@ -10,27 +10,39 @@
                 <table class="table">
                     <thead class="table-light">
                         <tr>
-                            <th>Project</th>
-                            <th>Client</th>
-                            <th>Users</th>
-                            <th>Status</th>
+                            <th>No</th>
+                            <th>Category Name</th>
+                            <th>Category Slug</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                        <tr>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>
-                                <form action="#" method="POST">
-                                    @csrf
-                                    <a href="#" class="btn btn-primary">EDIT</a>
-                                    <button type="submit" class="btn btn-danger">DELETE</button>
-                                </form>
-                            </td>
-                        </tr>
+                        @forelse ($category as $item)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->category_name }}</td>
+                                <td>{{ $item->slug }}</td>
+                                <td>
+                                    <form action="{{ route('category.destroy', $item->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <a href="{{ route('category.edit', $item->id) }}"
+                                            class="btn btn-icon btn-outline-primary">
+                                            <i class="bx bx-edit-alt"></i>
+                                        </a>
+                                        <button type="submit" class="btn btn-icon btn-outline-danger">
+                                            <i class="bx bx-trash-alt"></i>
+                                        </button>
+
+                                    </form>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr class="text-center fw-bold fs-5">
+                                <td colspan="4">No Data</td>
+                            </tr>
+                        @endforelse
+
                     </tbody>
                 </table>
             </div>

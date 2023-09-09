@@ -68,7 +68,7 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Category</span>
         </li>
-        <li class="menu-item {{ Route::is('category.create') ? 'active' : '' }}">
+        <li class="menu-item {{ Route::is('category.create') || Route::is('category.edit') ? 'active' : '' }}">
             <a href="{{ route('category.create') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Add Category</div>

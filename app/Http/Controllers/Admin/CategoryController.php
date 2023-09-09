@@ -16,9 +16,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $category = Category::latest()->get();
         $title = "All Category";
 
-        return view('category.index', compact('title'));
+        return view('category.index', compact('title', 'category'));
     }
 
     /**
@@ -45,11 +46,12 @@ class CategoryController extends Controller
             'category_name' => 'required|unique:categories',
         ]);
 
-        Category::insert([
+        Category::create([
             'category_name' => $request->category_name,
             'slug' => Str::slug($request->category_name)
         ]);
-        return back();
+        alert()->success('Category', "Category $request->category_name Created Successfully! ");
+        return redirect()->route('category.index');
     }
 
     /**
@@ -69,9 +71,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        $title = "Add Category";
+
+        return view('category.edit', compact('title', 'category'));
     }
 
     /**
@@ -81,9 +85,20 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'category_name' => 'required|unique:categories',
+        ]);
+
+        $category->update([
+            'category_name' => $request->category_name,
+            'slug' => Str::slug($request->category_name)
+        ]);
+
+
+        alert()->success('Category', "Category $request->category_name Updated Successfully! ");
+        return redirect()->route('category.index');
     }
 
     /**
@@ -92,8 +107,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        // dd($category);
+        $category->delete();
+        alert()->success('Category', "Category $category->category_name Deleted Successfully! ");
+        return back();
     }
 }
