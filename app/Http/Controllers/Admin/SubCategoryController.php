@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Subcategory;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class SubCategoryController extends Controller
 {
@@ -15,7 +18,8 @@ class SubCategoryController extends Controller
     public function index()
     {
         $title = "All Sub Category";
-        return view('subcategory.index', compact('title'));
+        $subCategory = Subcategory::latest()->get();
+        return view('subcategory.index', compact('title', 'subCategory'));
     }
 
     /**
@@ -26,7 +30,8 @@ class SubCategoryController extends Controller
     public function create()
     {
         $title = "Add Sub Category";
-        return view('subcategory.create', compact('title'));
+        $category = Category::latest()->get();
+        return view('subcategory.create', compact('title', 'category'));
     }
 
     /**
@@ -37,7 +42,26 @@ class SubCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'subcategory_name' => 'required|unique:subcategories',
+            'category_id' => 'required'
+        ]);
+
+        $categoryId = $request->category_id;
+        // dd($categoryId);
+
+        $categoryName = Category::where('id', $categoryId)->value('category_name');
+
+        Subcategory::create([
+            'subcategory_name' => $request->subcategory_name,
+            'category_id' => $categoryId,
+            'category_name' => $categoryName,
+            'slug' => Str::slug($request->subcategory_name)
+        ]);
+
+        Category::where('id', $categoryId)->increment('subcategory_count', 1);
+        alert()->success('Sub Category', "Sub Category $request->subcategory_name Created Successfully! ");
+        return redirect()->route('category.index');
     }
 
     /**

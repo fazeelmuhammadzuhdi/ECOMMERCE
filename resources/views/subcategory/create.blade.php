@@ -14,23 +14,32 @@
                         <small class="text-muted float-end">Input Information Sub Category</small>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('category.store') }}" method="POST">
+                        <form action="{{ route('subcategory.store') }}" method="POST">
                             @csrf
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="basic-default-name">Sub Category Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="subcategory_name" class="form-control"
-                                        id="basic-default-name" placeholder="Electronics" />
+                                    <input type="text" name="subcategory_name"
+                                        class="form-control @error('subcategory_name') is-invalid @enderror"
+                                        id="basic-default-name" placeholder="Iphone"
+                                        value="{{ old('subcategory_name') }}" />
+
+                                    @error('subcategory_name')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="basic-default-name">Select Category</label>
                                 <div class="col-sm-10">
                                     <select id="defaultSelect" name="category_id" class="form-select">
-                                        <option>Default select</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        <option value="" selected disabled>Choose Category</option>
+                                        @foreach ($category as $item)
+                                            <option value="{{ $item->id }}">{{ $item->category_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>

@@ -29,7 +29,6 @@ class CategoryController extends Controller
     public function create()
     {
         $title = "Add Category";
-
         return view('category.create', compact('title'));
     }
 
