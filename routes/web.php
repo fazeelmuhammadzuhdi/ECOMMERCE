@@ -30,8 +30,18 @@ Route::controller(HomeController::class)->group(function () {
 Route::controller(ClientController::class)->group(function () {
     Route::get('/category/{id}/{slug}', 'category')->name('category');
     Route::get('/product-details/{id}/{slug}', 'productDetails')->name('product-details');
-    Route::get('/add-to-cart', 'addToCart')->name('add-to-cart');
     Route::get('/checkout', 'checkout')->name('checkout');
+});
+
+Route::middleware(['auth', 'role:user'])->name('user.')->group(function () {
+    Route::controller(ClientController::class)->group(function () {
+        Route::get('/user-profile', 'userProfile')->name('profile');
+        Route::get('/pending-orders', 'pendingOrders')->name('pending-orders');
+        Route::get('/history', 'history')->name('history');
+        Route::get('/cart', 'cart')->name('cart');
+        Route::post('/add-product-to-cart/{id}', 'addProductToCart')->name('add-product-to-cart');
+        Route::delete('/cart/{id}', 'cartDelete')->name('cart-delete');
+    });
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {

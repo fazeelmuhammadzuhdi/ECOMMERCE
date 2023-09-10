@@ -27,8 +27,18 @@
                         </ul>
                     </div>
                     <div class="btn_main">
-                        <div class="btn btn-warning"><a href="#"><i class="fa fa-shopping-cart"></i> Add To
-                                Cart</a></div>
+                        <form action="{{ route('user.add-product-to-cart', $product->id) }}" method="POST">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="quantity" class="form-label">How Many Pics ?</label>
+                                <input type="number" name="quantity" id="quantity" class="form-control"
+                                    aria-describedby="helpId" min="1" value="0">
+                                <button type="submit" class="btn btn-warning mt-3">
+                                    <i class="fa fa-shopping-cart"></i> Add To Cart
+                                </button>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -52,10 +62,23 @@
                                             <div class="tshirt_img"><img src="{{ asset($item->product_image) }}">
                                             </div>
                                             <div class="btn_main">
-                                                <div class="buy_bt"><a href="#">Buy Now</a></div>
-                                                <div class="seemore_bt"><a
-                                                        href="{{ route('product-details', [$item->id, $item->slug]) }}">See
-                                                        More</a></div>
+                                                <div class="buy_bt">
+                                                    <form action="{{ route('user.add-product-to-cart', $item->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="quantity" value="1">
+                                                        <div class="mb-3">
+                                                            <button type="submit" class="btn btn-warning mt-3">
+                                                                Buy Now
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="mt-3">
+                                                    <a class="btn btn-primary"
+                                                        href="{{ route('product-details', [$item->id, $item->slug]) }}">
+                                                        See More</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

@@ -18,10 +18,24 @@
                                             <div class="tshirt_img"><img src="{{ asset($item->product_image) }}">
                                             </div>
                                             <div class="btn_main">
-                                                <div class="buy_bt"><a href="#">Buy Now</a></div>
-                                                <div class="seemore_bt"><a
-                                                        href="{{ route('product-details', [$item->id, $item->slug]) }}">See
-                                                        More</a></div>
+                                                <div class="buy_bt">
+                                                    <form action="{{ route('user.add-product-to-cart', $item->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="quantity" value="1">
+                                                        <div class="mb-3">
+                                                            <button type="submit" class="btn btn-warning mt-3">
+                                                                Buy Now
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="mt-3">
+                                                    <a class="btn btn-primary"
+                                                        href="{{ route('product-details', [$item->id, $item->slug]) }}">
+                                                        See More</a>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
