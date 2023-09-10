@@ -8,7 +8,7 @@
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                 <a href="{{ route('home') }}">Home</a>
                 @foreach ($category as $item)
-                    <a href="fashion.html">{{ $item->category_name }}</a>
+                    <a href="{{ route('category', [$item->id, $item->slug]) }}">{{ $item->category_name }}</a>
                 @endforeach
             </div>
             <span class="toggle_icon" onclick="openNav()"><img src="{{ asset('home/images/toggle-icon.png') }}"></span>
@@ -18,7 +18,8 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     @foreach ($category as $item)
-                        <a class="dropdown-item" href="#">{{ $item->category_name }}</a>
+                        <a class="dropdown-item"
+                            href="{{ route('category', [$item->id, $item->slug]) }}">{{ $item->category_name }}</a>
                     @endforeach
                 </div>
             </div>
