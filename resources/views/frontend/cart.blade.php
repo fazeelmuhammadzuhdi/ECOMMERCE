@@ -5,7 +5,7 @@
         <div id="main_slider">
             <div class="container">
                 <h1 class="fashion_taital">
-                    Cart Product Buy
+                    List of Products Purchased
                 </h1>
                 <div class="row">
                     <div class="col-12">
@@ -23,7 +23,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($cart as $item)
+                                        @forelse ($cart as $item)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>
@@ -42,7 +42,11 @@
                                                     </form>
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @empty
+                                            <tr class="text-center">
+                                                <td colspan="6"><b>No Product Has Been Purchased</b></td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>

@@ -36,22 +36,9 @@
                 </div>
             </div>
             <div class="header_box">
-                <div class="lang_box ">
-                    <a href="#" title="Language" class="nav-link" data-toggle="dropdown" aria-expanded="true">
-                        <img src="{{ asset('home/images/flag-uk.png') }}" alt="flag" class="mr-2 "
-                            title="United Kingdom">
-                        English <i class="fa fa-angle-down ml-2" aria-hidden="true"></i>
-                    </a>
-                    <div class="dropdown-menu ">
-                        <a href="#" class="dropdown-item">
-                            <img src="{{ asset('home/images/flag-france.png') }}" class="mr-2" alt="flag">
-                            French
-                        </a>
-                    </div>
-                </div>
                 <div class="login_menu">
                     <ul>
-                        <li><a href="#">
+                        <li><a href="{{ route('user.cart') }}">
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                 <span class="padding_10">Cart</span></a>
                         </li>
