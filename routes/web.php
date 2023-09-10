@@ -29,7 +29,7 @@ Route::controller(HomeController::class)->group(function () {
 
 Route::controller(ClientController::class)->group(function () {
     Route::get('/category/{id}/{slug}', 'category')->name('category');
-    Route::get('/single-product', 'singleProduct')->name('single-product');
+    Route::get('/product-details/{id}/{slug}', 'productDetails')->name('product-details');
     Route::get('/add-to-cart', 'addToCart')->name('add-to-cart');
     Route::get('/checkout', 'checkout')->name('checkout');
 });
