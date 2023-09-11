@@ -50,7 +50,7 @@ Route::middleware(['auth', 'role:user'])->name('user.')->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::controller(DashboardController::class)->prefix('admin')->group(function () {
-        Route::get('dashboard', 'index')->name('dashboard');
+        Route::get('dashboard', 'index')->name('admin-dashboard');
         Route::resource('category', CategoryController::class);
         Route::resource('subcategory', SubCategoryController::class);
         Route::get('edit-product-image/{id}', [ProductController::class, 'editImage'])->name('edit-image');
