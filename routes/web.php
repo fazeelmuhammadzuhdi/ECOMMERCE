@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -55,6 +56,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('edit-product-image/{id}', [ProductController::class, 'editImage'])->name('edit-image');
         Route::put('update-product-image/{id}', [ProductController::class, 'updateImage'])->name('update-image');
         Route::resource('product', ProductController::class);
+        Route::resource('order', OrderController::class);
     });
 });
 

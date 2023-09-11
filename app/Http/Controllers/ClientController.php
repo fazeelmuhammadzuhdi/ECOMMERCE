@@ -51,7 +51,24 @@ class ClientController extends Controller
 
     public function pendingOrders()
     {
-        return view('profile.pending-orders');
+        $authId = Auth::id();
+        $shippingInformation = ShippingInfo::where('user_id', $authId)->first();
+
+        if (!$shippingInformation) {
+            // Data shipping information tidak ditemukan, kirim pesan dan arahkan kembali ke halaman sebelumnya
+            alert()->error('No Orders', "Your Orders Pending Not Found! ");
+
+            return redirect()->back();
+        }
+
+        $orders = DB::table('orders')
+            ->join('products', 'orders.product_id', '=', 'products.id')
+            ->where('status', 'Pending')
+            ->where('orders.shipping_info_id', $shippingInformation->id)
+            ->select('products.*', 'orders.*')
+            ->get();
+        // dd($orders);
+        return view('profile.pending-orders', compact('orders'));
     }
 
     public function history()
@@ -103,26 +120,34 @@ class ClientController extends Controller
 
     public function shippingAddress()
     {
-        return view('profile.shipping-address');
+        $authId = Auth::id();
+        $shippingInfo = ShippingInfo::where('user_id', $authId)->first();
+        return view('profile.shipping-address', compact('shippingInfo'));
     }
 
     public function addShippingAddress(Request $request)
     {
         $authId = Auth::id();
         // dd($authId);
-        $request->validate([
-            'phone_number' => 'required',
-            'city_name' => 'required',
-            'postal_code' => 'required',
-        ]);
+        // Cek apakah data pengiriman sudah ada untuk pengguna ini
+        $existingShippingInfo = ShippingInfo::where('user_id', $authId)->first();
 
-        ShippingInfo::create([
-            'user_id' => $authId,
-            'phone_number' => $request->phone_number,
-            'city_name' => $request->city_name,
-            'postal_code' => $request->postal_code,
-        ]);
-        // alert()->success('Shipping Information', "Your Information Created Successfully! ");
+        if (!$existingShippingInfo) {
+            $request->validate([
+                'phone_number' => 'required',
+                'city_name' => 'required',
+                'postal_code' => 'required',
+            ]);
+
+            ShippingInfo::create([
+                'user_id' => $authId,
+                'phone_number' => $request->phone_number,
+                'city_name' => $request->city_name,
+                'postal_code' => $request->postal_code,
+            ]);
+            // alert()->success('Shipping Information', "Your Information Created Successfully! ");
+            return redirect()->route('user.checkout');
+        }
         return redirect()->route('user.checkout');
     }
 
@@ -150,6 +175,7 @@ class ClientController extends Controller
             ->where('carts.user_id', $authId)
             ->select('carts.*', 'products.product_name', 'products.product_price', 'products.product_qty')
             ->get();
+        // dd($cart);
         $shippingInformation = ShippingInfo::where('user_id', $authId)->firstOrFail();
         // dd($shippingInformation);
 
@@ -159,6 +185,7 @@ class ClientController extends Controller
             Order::create([
                 'shipping_info_id' => $shippingInformation->id,
                 'product_id' => $item->product_id,
+                'qty' => $item->quantity,
                 'total_price' => $item->price,
             ]);
 

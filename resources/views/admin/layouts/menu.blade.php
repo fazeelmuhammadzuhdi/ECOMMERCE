@@ -103,13 +103,13 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Product</span>
         </li>
-        <li class="menu-item {{ Route::is('product.create') ? 'active' : '' }}"">
+        <li class="menu-item {{ Route::is('product.create') ? 'active' : '' }}">
             <a href="{{ route('product.create') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Add Product</div>
             </a>
         </li>
-        <li class="menu-item {{ Route::is('product.index') ? 'active' : '' }}"">
+        <li class="menu-item {{ Route::is('product.index') ? 'active' : '' }}">
             <a href="{{ route('product.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">All Product</div>
@@ -120,8 +120,8 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Orders</span>
         </li>
-        <li class="menu-item">
-            <a href="index.html" class="menu-link">
+        <li class="menu-item {{ Route::is('order.*') ? 'active' : '' }}">
+            <a href="{{ route('order.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Pending Orders</div>
             </a>

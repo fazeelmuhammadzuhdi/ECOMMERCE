@@ -16,7 +16,8 @@
                                     <label for="phone_number" class="form-label">Phone Number</label>
                                     <input type="text" name="phone_number" id="phone_number"
                                         class="form-control @error('phone_number') is-invalid @enderror" placeholder="+62"
-                                        aria-describedby="helpId">
+                                        aria-describedby="helpId"
+                                        value="{{ old('phone_number', $shippingInfo?->phone_number) }}">
                                     @error('phone_number')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -25,7 +26,8 @@
                                     <label for="city_name" class="form-label">City / Village Name </label>
                                     <input type="text" name="city_name" id="city_name"
                                         class="form-control @error('city_name') is-invalid @enderror"
-                                        placeholder="West Sumatra" aria-describedby="helpId">
+                                        placeholder="West Sumatra" aria-describedby="helpId"
+                                        value="{{ old('city_name', $shippingInfo?->city_name) }}">
                                     @error('city_name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -34,7 +36,8 @@
                                     <label for="postal_code" class="form-label">Postal Code</label>
                                     <input type="text" name="postal_code" id="postal_code"
                                         class="form-control @error('postal_code') is-invalid @enderror" placeholder="25227"
-                                        aria-describedby="helpId">
+                                        aria-describedby="helpId"
+                                        value="{{ old('postal_code', $shippingInfo?->postal_code) }}">
                                     @error('postal_code')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror

@@ -16,6 +16,7 @@ class Order extends Model
     protected $fillable = [
         'shipping_info_id',
         'product_id',
+        'qty',
         'total_price',
     ];
 }
