@@ -23,6 +23,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {{-- @php
+                                            $total = 0;
+                                        @endphp --}}
                                         @forelse ($cart as $item)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
@@ -38,15 +41,29 @@
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-primary">Remove</button>
+                                                        <button type="submit" class="btn btn-warning">Remove</button>
                                                     </form>
                                                 </td>
                                             </tr>
+                                            {{-- @php
+                                                $total += $item->price;
+                                            @endphp --}}
                                         @empty
                                             <tr class="text-center">
                                                 <td colspan="6"><b>No Product Has Been Purchased</b></td>
                                             </tr>
                                         @endforelse
+                                        @if ($totalBelanja > 0)
+                                            <tr>
+                                                <td class="text-center" colspan="4">Total Bayar</td>
+                                                <td class="text-primary">$ {{ $totalBelanja }}</td>
+                                                <td>
+                                                    <a href="{{ route('user.shipping-address') }}"
+                                                        class="btn btn-primary">Checkout Now</a>
+                                                </td>
+                                            </tr>
+                                        @endif
+
                                     </tbody>
                                 </table>
                             </div>

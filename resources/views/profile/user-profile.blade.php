@@ -27,7 +27,6 @@
                     @yield('profile-content')
                 </div>
             </div>
-
         </div>
     </div>
 @endsection

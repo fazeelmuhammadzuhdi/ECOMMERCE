@@ -47,6 +47,8 @@
         <!-- header top section start -->
         @include('frontend.layouts.header')
         <!-- header top section start -->
+        @include('sweetalert::alert')
+
         <!-- logo section start -->
         <div class="logo_section">
             <div class="container">

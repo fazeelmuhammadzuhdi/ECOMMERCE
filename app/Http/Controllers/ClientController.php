@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
+use App\Models\ShippingInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -36,7 +38,10 @@ class ClientController extends Controller
             ->select('carts.*', 'products.product_name', 'products.product_price', 'products.product_qty', 'products.product_image')
             ->get();
         // dd($cart);
-        return view('frontend.cart', compact('cart'));
+
+        $totalBelanja = Cart::where('user_id', $authId)->sum('price');
+        // dd($total);
+        return view('frontend.cart', compact('cart', 'totalBelanja'));
     }
 
     public function userProfile()
@@ -74,6 +79,9 @@ class ClientController extends Controller
         $product->update([
             'product_qty' => $product->product_qty - $quantity
         ]);
+
+        alert()->success('Cart', "Your Item $product->product_name Added To Cart Successfully! ");
+
         return redirect()->route('user.cart')->with('message', 'Your Item Added To Cart Successfully!');
     }
 
@@ -88,7 +96,76 @@ class ClientController extends Controller
         ]);
 
         $cart->delete();
+        alert()->success('Cart', "Your Item $product->product_name Removed From Cart Successfully! ");
 
         return redirect()->route('user.cart');
+    }
+
+    public function shippingAddress()
+    {
+        return view('profile.shipping-address');
+    }
+
+    public function addShippingAddress(Request $request)
+    {
+        $authId = Auth::id();
+        // dd($authId);
+        $request->validate([
+            'phone_number' => 'required',
+            'city_name' => 'required',
+            'postal_code' => 'required',
+        ]);
+
+        ShippingInfo::create([
+            'user_id' => $authId,
+            'phone_number' => $request->phone_number,
+            'city_name' => $request->city_name,
+            'postal_code' => $request->postal_code,
+        ]);
+        // alert()->success('Shipping Information', "Your Information Created Successfully! ");
+        return redirect()->route('user.checkout');
+    }
+
+    public function checkout()
+    {
+        $authId = Auth::id();
+        $cart = DB::table('carts')
+            ->join('products', 'carts.product_id', '=', 'products.id')
+            ->where('carts.user_id', $authId)
+            ->select('carts.*', 'products.product_name', 'products.product_price', 'products.product_qty', 'products.product_image')
+            ->get();
+        // dd($cart);
+
+        $shippingInformation = ShippingInfo::where('user_id', $authId)->firstOrFail();
+        // dd($shippingInformation);
+        $totalBelanja = Cart::where('user_id', $authId)->sum('price');
+        return view('profile.checkout', compact('cart', 'shippingInformation', 'totalBelanja'));
+    }
+
+    public function order(Request $request)
+    {
+        $authId = Auth::id();
+        $cart = DB::table('carts')
+            ->join('products', 'carts.product_id', '=', 'products.id')
+            ->where('carts.user_id', $authId)
+            ->select('carts.*', 'products.product_name', 'products.product_price', 'products.product_qty')
+            ->get();
+        $shippingInformation = ShippingInfo::where('user_id', $authId)->firstOrFail();
+        // dd($shippingInformation);
+
+        // masukkan ke order dengan cara meloping cart karena user bisa saja memiliki banyak orderan
+
+        foreach ($cart as $item) {
+            Order::create([
+                'shipping_info_id' => $shippingInformation->id,
+                'product_id' => $item->product_id,
+                'total_price' => $item->price,
+            ]);
+
+            //Delete Cart Ketika User Sudah Checkout
+            $cart = Cart::where('user_id', $item->user_id)->delete();
+        }
+        alert()->success('Success', "Your Order Has Been Placed Successfully! ");
+        return redirect()->route('user.pending-orders');
     }
 }
