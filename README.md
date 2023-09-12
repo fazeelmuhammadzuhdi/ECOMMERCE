@@ -1,10 +1,10 @@
 <h1 align="center">Selamat datang di Aplikasi E Commerce👋</h1>
 
 <p float="left">
-  <img src="https://raw.githubusercontent.com/fazeelmuhammadzuhdi/ECOMMERCE/main/public/screenshoot/hasil1.png" width="100" />
-  <img src="https://raw.githubusercontent.com/fazeelmuhammadzuhdi/ECOMMERCE/main/public/screenshoot/hasil2.png" width="100" />
-  <img src="https://raw.githubusercontent.com/fazeelmuhammadzuhdi/ECOMMERCE/main/public/screenshoot/hasil3.png" width="100" />
-  <img src="https://raw.githubusercontent.com/fazeelmuhammadzuhdi/ECOMMERCE/main/public/screenshoot/hasil4.png" width="100" />
+  <img src="https://raw.githubusercontent.com/fazeelmuhammadzuhdi/ECOMMERCE/main/public/screenshoot/hasil1.png"/>
+  <img src="https://raw.githubusercontent.com/fazeelmuhammadzuhdi/ECOMMERCE/main/public/screenshoot/hasil2.png"/>
+  <img src="https://raw.githubusercontent.com/fazeelmuhammadzuhdi/ECOMMERCE/main/public/screenshoot/hasil3.png"/>
+  <img src="https://raw.githubusercontent.com/fazeelmuhammadzuhdi/ECOMMERCE/main/public/screenshoot/hasil4.png"/>
 </p>
 
 
