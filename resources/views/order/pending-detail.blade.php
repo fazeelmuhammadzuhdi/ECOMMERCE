@@ -38,7 +38,7 @@
                                     <form action="{{ route('order.update', $item->id) }}" method="POST">
                                         @csrf
                                         @method('PUT')
-                                        <button type="submit" class="btn btn-success">Accept Now</button>
+                                        <button class="btn btn-success">Accept Now</button>
                                     </form>
                                 </td>
                             </tr>
