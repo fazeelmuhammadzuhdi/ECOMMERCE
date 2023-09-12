@@ -1,8 +1,10 @@
 <h1 align="center">Selamat datang di Aplikasi E Commerce👋</h1>
 
 
-![Screenshot Aplikasi](https://raw.githubusercontent.com/fazeelmuhammadzuhdi/ECOMMERCE/main/public/screenshoot/hasil1.png
-)
+![Screenshot Aplikasi 1](https://raw.githubusercontent.com/fazeelmuhammadzuhdi/ECOMMERCE/main/public/screenshoot/hasil1.png)
+![Screenshot Aplikasi 2](https://raw.githubusercontent.com/fazeelmuhammadzuhdi/ECOMMERCE/main/public/screenshoot/hasil2.png)
+![Screenshot Aplikasi 3](https://raw.githubusercontent.com/fazeelmuhammadzuhdi/ECOMMERCE/main/public/screenshoot/hasil3.png)
+
 
 
 ### 🤔 Apa itu E Commerce?
