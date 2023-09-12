@@ -1,6 +1,5 @@
 <h1 align="center">Selamat datang di Aplikasi E Commerce👋</h1>
 
-[](url)
 ![Screenshot Aplikasi](/screenshoot/hasil1.png)
 
 ### 🤔 Apa itu E Commerce?
