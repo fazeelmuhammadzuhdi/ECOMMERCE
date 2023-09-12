@@ -18,5 +18,6 @@ class Order extends Model
         'product_id',
         'qty',
         'total_price',
+        'status',
     ];
 }

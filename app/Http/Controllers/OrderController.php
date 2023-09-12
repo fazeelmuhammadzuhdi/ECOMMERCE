@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\ShippingInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -32,7 +33,17 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        $title = "Oder Completed & Shipping Information User";
+
+        $orders = DB::table('orders')
+            ->join('products', 'orders.product_id', '=', 'products.id')
+            ->join('shipping_infos', 'orders.shipping_info_id', '=', 'shipping_infos.id')
+            ->join('users', 'shipping_infos.user_id', '=', 'users.id')
+            ->where('orders.status', 'Success')
+            ->select('products.*', 'orders.*', 'shipping_infos.*', 'users.*')
+            ->get();
+        // dd($orders);
+        return view('order.completed', compact('orders', 'title'));
     }
 
     /**
@@ -88,7 +99,16 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $updateStatusInOrder = Order::findOrFail($id);
+        // $updateStatusInOrder->status = 'Success';
+        // $updateStatusInOrder->save();
+        $updateStatusInOrder->update([
+            'status' => 'Success'
+        ]);
+        // dd($updateStatusInOrder);
+        alert()->success('Order', "Order  Status $updateStatusInOrder->shipping_info_id Updated Successfully! ");
+        return redirect()->route('order.index');
+        // dd($updateStatusInOrder);
     }
 
     /**

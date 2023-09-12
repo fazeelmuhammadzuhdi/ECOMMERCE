@@ -35,9 +35,11 @@
                                 <td>{{ $item->qty }}</td>
                                 <td>{{ $item->product_price }}</td>
                                 <td>
-                                    <a href="{{ route('order.show', $item->id) }}" class="btn btn-success">
-                                        Accept Now
-                                    </a>
+                                    <form action="{{ route('order.update', $item->id) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="submit" class="btn btn-success">Accept Now</button>
+                                    </form>
                                 </td>
                             </tr>
                             @php
@@ -45,7 +47,7 @@
                             @endphp
                         @empty
                             <tr class="text-center fw-bold fs-5">
-                                <td colspan="5">No Data</td>
+                                <td colspan="6">No Data</td>
                             </tr>
                         @endforelse
                         <tr>
