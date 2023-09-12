@@ -1,13 +1,16 @@
 <h1 align="center">Selamat datang di Aplikasi E Commerce👋</h1>
 
-![Screenshot Aplikasi](/screenshoot/hasil1.png)
+
+![Screenshot Aplikasi](https://raw.githubusercontent.com/fazeelmuhammadzuhdi/ECOMMERCE/main/public/screenshoot/hasil1.png
+)
+
 
 ### 🤔 Apa itu E Commerce?
 Web E Commerce Sederhana Open Source yang dibuat oleh <a href="https://github.com/fazeelmuhammadzuhdi"> Fazeel Muhammad Zuhdi. </a> **E-Commerce adalah Website proses terjadinya transaksi jual beli yang dalam prakteknya dilakukan secara online melalui media elektronik.** Aplikasi Ini dibuat untuk memudahkan proses Pembelian Product dengan mudah.
 
 ### 🎉 Kenapa dibuat Open Source?
 Untuk Bahan Belajar Saya Dan Juga Teman Teman Yang Ingin mempelajari Framework Laravel.
-
+Aplikasi Ini Juga Menggunakan Laravel Breeze dan Package Laratrust. Laratrust is an easy and flexible way to add roles, permissions and teams authorization to Laravel.
 ### 📆 <a href="#">Release Date</a>
 - 12 September 2023
 
