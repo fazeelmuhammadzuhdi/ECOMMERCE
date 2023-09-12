@@ -27,18 +27,22 @@
                                 <td>{{ $item->slug }}</td>
                                 <td>{{ $item->product_count }}</td>
                                 <td>
-                                    <form action="{{ route('subcategory.destroy', $item->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="{{ route('subcategory.edit', $item->id) }}"
-                                            class="btn btn-icon btn-outline-primary">
-                                            <i class="bx bx-edit-alt"></i>
-                                        </a>
-                                        <button type="submit" class="btn btn-icon btn-outline-danger">
+                                    <div class="d-flex">
+                                        <button class="btn btn-icon btn-outline-danger me-2"
+                                            onclick="deleteAlert('{{ $item->id }}', 'Delete Sub Category {{ $item->subcategory_name }}')">
                                             <i class="bx bx-trash-alt"></i>
                                         </button>
 
-                                    </form>
+                                        <form action="{{ route('subcategory.destroy', $item->id) }}" method="POST"
+                                            id="Delete{{ $item->id }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="{{ route('subcategory.edit', $item->id) }}"
+                                                class="btn btn-icon btn-outline-primary">
+                                                <i class="bx bx-edit-alt"></i>
+                                            </a>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @empty
@@ -52,4 +56,7 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    @include('alert.delete')
 @endsection

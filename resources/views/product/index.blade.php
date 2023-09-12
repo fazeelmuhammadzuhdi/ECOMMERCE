@@ -31,27 +31,27 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <form action="{{ route('product.destroy', $item->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="{{ route('product.edit', $item->id) }}"
-                                            class="btn btn-icon btn-outline-primary">
-                                            <i class="bx bx-edit-alt"></i>
-                                        </a>
-                                        <a href="{{ route('edit-image', $item->id) }}"
-                                            class="btn btn-icon btn-outline-warning">
-                                            <i class="bx bx-image-alt"></i>
-                                        </a>
-                                        <button type="submit" class="btn btn-icon btn-outline-danger">
+                                    <div class="d-flex">
+                                        <button class="btn btn-icon btn-outline-danger me-2"
+                                            onclick="deleteAlert('{{ $item->id }}', 'Delete Product {{ $item->product_name }}')">
                                             <i class="bx bx-trash-alt"></i>
                                         </button>
 
-                                    </form>
+                                        <form action="{{ route('product.destroy', $item->id) }}" method="POST"
+                                            id="Delete{{ $item->id }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="{{ route('product.edit', $item->id) }}"
+                                                class="btn btn-icon btn-outline-primary">
+                                                <i class="bx bx-edit-alt"></i>
+                                            </a>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @empty
                             <tr class="text-center fw-bold fs-5">
-                                <td colspan="5">No Data</td>
+                                <td colspan="5">No Data Product</td>
                             </tr>
                         @endforelse
 
@@ -60,4 +60,7 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    @include('alert.delete')
 @endsection
