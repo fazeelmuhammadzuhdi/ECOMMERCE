@@ -20,23 +20,27 @@
                     <tbody class="table-border-bottom-0">
                         @forelse ($category as $item)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $loop->iteration + $category->firstItem() - 1 . '.' }}</td>
                                 <td>{{ $item->category_name }}</td>
                                 <td>{{ $item->subcategory_count }}</td>
                                 <td>{{ $item->slug }}</td>
                                 <td>
-                                    <form action="{{ route('category.destroy', $item->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="{{ route('category.edit', $item->id) }}"
-                                            class="btn btn-icon btn-outline-primary">
-                                            <i class="bx bx-edit-alt"></i>
-                                        </a>
-                                        <button type="submit" class="btn btn-icon btn-outline-danger">
+                                    <div class="d-flex">
+                                        <button class="btn btn-icon btn-outline-danger me-2"
+                                            onclick="deleteAlert('{{ $item->id }}', 'Delete Category {{ $item->category_name }}')">
                                             <i class="bx bx-trash-alt"></i>
                                         </button>
 
-                                    </form>
+                                        <form action="{{ route('category.destroy', $item->id) }}" method="POST"
+                                            id="Delete{{ $item->id }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="{{ route('category.edit', $item->id) }}"
+                                                class="btn btn-icon btn-outline-primary">
+                                                <i class="bx bx-edit-alt"></i>
+                                            </a>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @empty
@@ -48,6 +52,18 @@
                     </tbody>
                 </table>
             </div>
+            <div class="container mt-3">
+                <div class="row">
+                    <div class="col-md-12">
+                        {{ $category->links() }}
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
+@endsection
+@section('script')
+    @include('alert.delete')
 @endsection
